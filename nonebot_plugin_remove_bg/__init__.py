@@ -11,7 +11,7 @@ from nonebot.adapters.onebot.v11 import (
     MessageEvent,
     PrivateMessageEvent,
 )
-from nonebot.params import CommandArg, ShellCommandArgv, State
+from nonebot.params import CommandArg, ShellCommandArgv
 # from nonebot.rule import ArgumentParser, ParserExit
 
 # 官网获取 https://www.remove.bg/api#remove-background
@@ -24,10 +24,10 @@ try:
 except:
     nonebot.logger.debug("REMOVE_BG_API_KEY配置缺失喵，不配置功能无法使用滴~")
 
-catch_str = on_command("remove_bg", aliases={"去背景", "rm_bg"})
+catch_str = on_command("去背景", aliases={"rm_bg"})
 
 @catch_str.handle()
-async def _(arg: Message = CommandArg(), state: T_State = State()):
+async def _(state: T_State, arg: Message = CommandArg()):
     msg = arg
     if msg:
         state["src_img"] = msg
@@ -35,7 +35,7 @@ async def _(arg: Message = CommandArg(), state: T_State = State()):
 
 
 @catch_str.got("src_img", prompt="请发送需要去除背景的图片喵~")
-async def _(bot: Bot, event: MessageEvent, state: T_State = State()):
+async def _(bot: Bot, event: MessageEvent, state: T_State):
     # 信息源自 群聊或私聊
     msg_from = "group"
     # 判断消息类型
