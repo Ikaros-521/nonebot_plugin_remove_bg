@@ -93,6 +93,8 @@ REMOVE_BG_API_KEY="XXXXXXXXXXXXXXXXXXXXXXXX"
 |:----------------:|:----:|:----:|:----------------------------:|
 | `REMOVE_BG_API_KEY` | 是 | `` | 注册官方账号申请API KEY |
 
+### API KEY获取方式
+访问[https://www.remove.bg/api#remove-background](https://www.remove.bg/api#remove-background)，注册账号，然后点击`Get API Key` -> ` New API Key` -> `Create API Key`。  
 
 ## 🎉 功能
 基于remove.bg，上传图片调用API消除背景后返回处理后的图片  
