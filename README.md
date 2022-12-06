@@ -120,6 +120,10 @@ REMOVE_BG_API_KEY="XXXXXXXXXXXXXXXXXXXXXXXX"
 
 - 插件初次发布
 
+### 0.0.2
+
+- 向上兼容rc2  
+
 
 </details>
 
