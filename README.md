@@ -91,7 +91,7 @@ REMOVE_BG_API_KEY="XXXXXXXXXXXXXXXXXXXXXXXX"
 ```
 |       配置项        | 必填 | 默认值  |                      说明                      |
 |:----------------:|:----:|:----:|:----------------------------:|
-| `REMOVE_BG_API_KEY` | 是 | `` | 注册官方账号申请API KEY |
+| `REMOVE_BG_API_KEY` | 是 | `` | 注册官方账号申请API KEY（每月50次免费额度） |
 
 ### API KEY获取方式
 访问[https://www.remove.bg/api#remove-background](https://www.remove.bg/api#remove-background)，注册账号，然后点击`Get API Key` -> ` New API Key` -> `Create API Key`。  
@@ -101,15 +101,44 @@ REMOVE_BG_API_KEY="XXXXXXXXXXXXXXXXXXXXXXXX"
 
 ## 👉 命令
 
-### 1、先发送命令，再发送图片（命令前缀请自行替换）
-先发送`/remove_bg`或`/去背景`或`/rm_bg`，等bot返回`请发送需要去除背景的图片喵~`后，发送需要去除背景的图片即可。  
+### ①默认配置的背景消除
 
-### 2、命令+图片
-编辑消息`/remove_bg[待去除背景的图片]`或`/去背景[待去除背景的图片]`或`/rm_bg[待去除背景的图片]`发送即可。 
+#### 1、先发送命令，再发送图片（命令前缀请自行替换）
+先发送`/去背景`或`/rm_bg`，等bot返回`请发送需要去除背景的图片喵~`后，发送需要去除背景的图片即可。  
+
+#### 2、命令+图片
+编辑消息`/去背景[待去除背景的图片]`或`/rm_bg[待去除背景的图片]`发送即可。 
+
+#### 3、回复图片+命令
+回复需要处理的图片，然后追加命令`/去背景`或`/rm_bg`发送即可。
+
+### ②自定义配置的背景消除
+
+#### 1、命令+图片
+命令如下(命令前缀自行添加)：  
+```
+自定义去背景 -img <IMAGE> [-s --size -最大输出分辨率 <最大输出图像分辨率 'preview/full/auto'>] [-t --type -前景类型 <前景类型 'auto/person/product/car'>] [-tl --type_level -前景类型级别 <检测到的前景类型的分类级别 'none/1/2/latest'>]\n [-r --roi -感兴趣区域 <感兴趣区域 x1 y1 x2 y2，如'0% 0% 100% 100%'>] [-c --crop -裁剪空白区 <是否裁剪掉所有空白区域 'true/false'>] [-p --position -定位主题 <在图像画布中定位主题 'center/original/从“0%”到“100%”的一个值(水平和垂直)或两个值(水平、垂直)'>]\n [-sc --scale -缩放主体 <相对于图像总尺寸缩放主体 从“10%”到“100%”之间的任何值，也可以是“original”(默认)。缩放主体意味着“位置=中心”(除非另有说明)。>] [-ad --add_shadow -人工阴影 <是否向结果添加人工阴影 'true/false'>] [-se --semitransparency -半透明区域 <结果中是否包含半透明区域 'true/false'>]
+``` 
+命令起始：`自定义去背景` 或 `remove_bg`  
+`-img` 必选参数，后面追加`<IMAGE>`图片（回复的话，图片就不用了）  
+`-s` 可选参数 `-s`可以改成 `--size` 或 `-最大输出分辨率`，含义是最大输出图像分辨率，传参内容是`'preview/full/auto'`（3选1）  
+其他的[]都是可选参数，含义和-s相同，不再赘述。  
+
+例如：  
+```
+/自定义去背景 -img <IMAGE> -s 'preview'
+/remove_bg -img <IMAGE> -s 'full' -r '30% 30% 60% 60%' -ad 'true'
+```
+
+#### 2、回复图片+命令
+命令与上面相同，注意必选参数`-img`，不要忘记了。  
+
+#### 3、自定义去背景帮助
+获取命令的帮助说明`自定义去背景帮助` 或 `自定义去背景help`   
 
 ## ⚙ 拓展
-修改`__init__.py`中的`catch_str = on_command("remove_bg", aliases={"去背景", "rm_bg"})`来自定义命令触发关键词。  
-请求的参数有很多，可以自行修改或加到命令传参里面丰富功能。  
+修改`__init__.py`中的`catch_str`等来自定义命令触发关键词。  
+代码实现缝合怪，感觉很kuso，待优化（大坑）    
 
 ## 📝 更新日志
 
@@ -123,6 +152,11 @@ REMOVE_BG_API_KEY="XXXXXXXXXXXXXXXXXXXXXXXX"
 ### 0.0.2
 
 - 向上兼容rc2  
+
+### 0.1.0
+
+- 修改原 remove_bg命令至 自定义去背景 功能（采用shell cmd的形式）。
+- 原 rm_bg 和 去背景 命令，增加可以直接回复图片进行处理。
 
 
 </details>
