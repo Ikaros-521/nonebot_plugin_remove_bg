@@ -54,18 +54,19 @@ async def _(bot: Bot, event: MessageEvent, state: T_State):
         msg_from = "private"
     
     url = ""
+    # nonebot.logger.debug("img_url:" + img_url)
     if img_url == "":
         msg: Message = state["src_img"]
         # try:
         for msg_sag in msg:
             if msg_sag.type == "image":
-                url = msg
+                url = msg_sag.data["url"]
             else:
                 await catch_str.finish("请发送图片喵~命令结束")
     else:
         url = img_url
 
-    nonebot.logger.info(url)
+    nonebot.logger.info("url:" + url)
 
     # 私聊的图片需要特殊处理
     if msg_from == "group":

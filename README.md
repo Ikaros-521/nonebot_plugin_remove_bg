@@ -163,6 +163,9 @@ REMOVE_BG_API_KEY="XXXXXXXXXXXXXXXXXXXXXXXX"
 - 修改原 remove_bg命令至 自定义去背景 功能（采用shell cmd的形式）。
 - 原 rm_bg 和 去背景 命令，增加可以直接回复图片进行处理。
 
+### 0.1.1
+
+- 修复 私聊bot无法正常运行的bug
 
 </details>
 
